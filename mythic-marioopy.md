@@ -30,3 +30,4 @@ After determining that the machine on Shodan and Censys was the same box reporti
 9/21/26: Hostinger reports the "reported material(s) have been removed".\
 9/22/26: marioopy[.]site still live, port 7443 still live (Censys, 16:10 UTC), domain still resolving, WHOIS not showing a hold, follow-up sent to Hostinger. Report also sent to abuse@hostvds.com
 9/23/26: No response from either Hostinger or HostVDS.
+9/24/26: Hostinger informed that the "malicious site is no longer accessble", the domain is still resolving so it was not suspended, and the site is still completely accessible on port 7443. Replied to Hostinger pushing for domain suspension.
