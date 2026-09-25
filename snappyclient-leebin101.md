@@ -1,0 +1,11 @@
+# leebin101[.]com: SnappyClient Downloader
+> All interaction with the malicious URLs was done through urlscan.io and Any.Run
+
+## Summary
+While browsing ThreatFox, I located a recent submission for a ClickFix related URL (strategyvote[.]com). Using urlscan.io, I was able to verify that this URL is hosting a fake CloudFlare verification page. Upon clicking on the "Verify you're human" checkbox, a panel pops open stating "Gateway Verification - Challenge Response ID: [random]" as a decoy and includes a copy button, clicking on copy, and following the instructions (Open the Run dialogue and paste, then execute) causes powershell to open, and reaches out to leebin101[.]com/r. The first request returns a further obfuscated powershell script (base64 encoded payload) that reaches back out to leebin101[.]com, this time to the /g.php endpoint, which returns a ZIP file containing several files. The main file included in the ZIP is called "Grape.exe". This executable is launched via a scheduled task, and this process spawns several child processes, namely "ZServer.exe", which is identified as the Win.SnappyClient malware family.
+
+## Attack Chain
+1. Victim visits strategyvote[.]com and the initial powershell script is copied to their clipboard, and is then informed to paste this into the Windows Run Dialogue.
+2. After pasting the Powershell script, it reaches out to leebin101[.]com/r, which returns another powershell script, also obfuscated with a base64 encoded payload.
+3. The second script reaches back out to the leebin101[.]com URL, this time at the leebin101[.]com/g.php endpoint, which is serving a ZIP folder containing an executable named "Grape.exe"
+4. Grape.exe is executed via a scheduled task which was created by the previous PowerShell script. This process then spawns a child process called "Logic-Inspector.exe" which spawns another child process with the same name, and that process has a further child process called "ZServer.exe" which was identified by ANY.RUN as the Win.SnappyClient malware family.
